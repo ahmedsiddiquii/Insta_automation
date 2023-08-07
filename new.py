@@ -9,6 +9,7 @@ from selenium.webdriver.chrome.service import Service
 import pandas as pd
 import undetected_chromedriver as uc
 from selenium.common.exceptions import NoSuchElementException
+import requests
 
 driver = webdriver.Chrome()
 
