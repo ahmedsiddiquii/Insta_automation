@@ -178,41 +178,62 @@ class Ui_MainWindow(object):
         self.pushButton_21.setText(_translate("MainWindow", "Upload User Name"))
 
 class MainWindow(QMainWindow):
-        def __init__(self):
-                QMainWindow.__init__(self)
-                self.ui = Ui_MainWindow()
-                self.setWindowTitle('')
-                self.ui.setupUi(self)
-                self.ui.pushButton_20.clicked.connect(self.select_login_file)
-                self.ui.pushButton_21.clicked.connect(self.select_username_file)
-                self.ui.pushButton_18.clicked.connect(self.login)
-                
-        def select_login_file(self):
-                options = QFileDialog.Options()
-                options |= QFileDialog.DontUseNativeDialog
-                file_path, _ = QFileDialog.getOpenFileName(self, "Select Text File", "", "Text Files (*.txt);;All Files (*)", options=options)
-                if file_path:
-                        print(file_path)
-                        self.ui.lineEdit_7.setText(file_path)
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.ui = Ui_MainWindow()
+        self.setWindowTitle('')
+        self.ui.setupUi(self)
+        self.ui.pushButton_20.clicked.connect(self.select_login_file)
+        self.ui.pushButton_21.clicked.connect(self.select_username_file)
+        self.ui.pushButton_18.clicked.connect(self.main)
 
-        def select_username_file(self):
-                options = QFileDialog.Options()
-                options |= QFileDialog.DontUseNativeDialog
-                file_path, _ = QFileDialog.getOpenFileName(self, "Select Text File", "", "Text Files (*.txt);;All Files (*)", options=options)
-                if file_path:
-                        print(file_path)
-                        self.ui.lineEdit_8.setText(file_path)
+    def select_login_file(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        file_path, _ = QFileDialog.getOpenFileName(self, "Select Text File", "", "Text Files (*.txt);;All Files (*)", options=options)
+        if file_path:
+            print(file_path)
+            self.ui.lineEdit_7.setText(file_path)
 
+    def select_username_file(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        file_path2, _ = QFileDialog.getOpenFileName(self, "Select Text File", "", "Text Files (*.txt);;All Files (*)", options=options)
+        if file_path2:
+            print(file_path2)
+            self.ui.lineEdit_8.setText(file_path2)
 
-        def login(self, file_path):
-                
-                df = pd.read_csv(file_path)
-                id=df.split(',,')
-                ide=id[0]
-                password=id[1]
-                print(ide)
-                print(password)
-                        
+    def main(self):
+        # Get the file paths from the line edits
+        file_path = self.ui.lineEdit_7.text()
+        file_path2 = self.ui.lineEdit_8.text()
+
+        # Call the login and user methods
+        self.login(file_path)
+        self.user(file_path2)
+
+    def login(self, file_path):
+        try:
+            with open(file_path, 'r') as file:
+                content = file.read()
+
+                lines = content.splitlines()
+                for line in lines:
+                     id= line.split(',,')
+                     ide=id[0]
+                     pas=id[1]
+                     print(ide)
+                     print(pas)
+        except Exception as e:
+            print("Error reading or parsing the file:", e)
+
+    def user(self, file_path2):
+        with open(file_path2, 'r') as file:
+            content = file.read()
+
+            lines = content.splitlines()
+            for line in lines:
+                print(line, "user=====user")
 
 
 from sys import exit as sysExit         
