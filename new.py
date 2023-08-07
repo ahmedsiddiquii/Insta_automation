@@ -67,7 +67,7 @@ def send_messages_to_top_30_users():
     likes_button.click()
     time.sleep(5)
 
-    likes1 = driver.find_element(by='xpath', value='//div[@class="x9f619 xjbqb8w x78zum5 x168nmei x13lgxp2 x5pf9jr xo71vjh x1n2onr6 x6ikm8r x10wlt62 x1iyjqo2 x2lwn1j xeuugli xdt5ytf xqjyukv x1qjc9v5 x1oa3qoh x1nhvcw1"]')
+    likes1 = driver.find_element(by='xpath', value='//div[@style="height: 356px; overflow: hidden auto;"]')
 
     # Desired number of links to collect
     target_links_count = 30
