@@ -72,21 +72,26 @@ def send_messages_to_top_30_users():
     # Desired number of links to collect
     target_links_count = 30
     action =ActionChains(driver)
-    
 
     while True:
-        # Scroll within the likes1 element using JavaScript
-        scroll_script = "arguments[0].scrollBy(0, arguments[0].scrollHeight);"
-        # driver.execute_script(scroll_script, likes1)
-        # action.send_keys(likes1,Keys.DOWN)
-        action.move_to_element(likes1).send_keys(Keys.DOWN).perform()
-        
+        # Save the initial scroll height
+        initial_scroll_height = driver.execute_script('return arguments[0].scrollHeight;', likes1)
+
+        # Scroll to the bottom of the likes1 element
+        driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight;', likes1)
+
         time.sleep(2)  # You can adjust this delay as needed
-        
+
+        # Check if the scroll height has changed after the scroll action
+        new_scroll_height = driver.execute_script('return arguments[0].scrollHeight;', likes1)
+        if new_scroll_height == initial_scroll_height:
+            # If the scroll height hasn't changed, we've likely reached the bottom
+            break
+
         likes_popup = likes1.find_elements(by='xpath', value='.//a')
         collected_links = [link.get_attribute("href") for link in likes_popup]
         unique_links = list(set(collected_links))
-        
+
         if len(unique_links) >= target_links_count:
             break
 
