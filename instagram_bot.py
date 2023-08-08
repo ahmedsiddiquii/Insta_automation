@@ -17,7 +17,8 @@ from selenium.webdriver.chrome.service import Service
 import pandas as pd
 import undetected_chromedriver as uc
 from selenium.common.exceptions import NoSuchElementException
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Ui_MainWindow(object):
@@ -367,9 +368,10 @@ class MainWindow(QMainWindow):
                 if self.ui.checkBox.isChecked():
                         self.tags(file_path3)
                 if self.ui.checkBox_2.isChecked():
-                        self.user(file_path2)
-                if self.ui.checkBox_3.isChecked():
                         self.send_Post_users(file_path4)
+                        
+                if self.ui.checkBox_3.isChecked():
+                        self.user(file_path2)
 
     def user(self, file_path2):
         print("user====user")
@@ -384,8 +386,13 @@ class MainWindow(QMainWindow):
                 time.sleep(5)
                 try:
                         send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Message")]')
-                        send_message_button.click()        
-                        time.sleep(10)
+                        send_message_button.click()
+                        time.sleep(15)
+                        try:
+                                self.driver.find_element(by='xpath',value='//button[@class="_a9-- _a9_1"]').click()
+                        except:
+                              pass        
+                        time.sleep(5)
                         message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
                         message_input.send_keys("hello")
                         message_input.send_keys(Keys.ENTER)
