@@ -19,7 +19,7 @@ import undetected_chromedriver as uc
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.chrome.options import Options
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -324,6 +324,9 @@ class MainWindow(QMainWindow):
             print(file_path4)
             self.ui.lineEdit_10.setText(file_path4)       
 
+    
+
+
 
     def main(self):
         # Get the file paths from the line edits
@@ -353,14 +356,15 @@ class MainWindow(QMainWindow):
                         passwords.append(id[1])
                         print(ide)
                         print(pas)
+        
         for i in range(len(ids)):
                 try:
                         self.driver = webdriver.Chrome()
                         self.driver.get("https://www.instagram.com/")
-                        time.sleep(5)  
+                        time.sleep(15)  
                         login_insta = self.driver.find_element(by='xpath',value=  '//input[@aria-label="Phone number, username, or email"]').send_keys(ids[i])
                         password= self.driver.find_element(by='xpath',value='//input[@type="password"]').send_keys(passwords[i])
-                        time.sleep(5)
+                        time.sleep(15)
                         login= self.driver.find_element(by='xpath', value='//div//button[@class="_acan _acap _acas _aj1-"]').click()
                         time.sleep(10)
                 except:
@@ -382,22 +386,36 @@ class MainWindow(QMainWindow):
             for line in lines:
                 line=line
         for searches in lines:
-                self.driver.get(f"https://www.instagram.com/{searches}/")
+                self.driver.get("https://www.instagram.com/direct/t")
+                time.sleep(15)
+                
+                send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Send message")]')
+                send_message_button.click()
                 time.sleep(5)
-                try:
-                        send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Message")]')
-                        send_message_button.click()
-                        time.sleep(15)
-                        try:
-                                self.driver.find_element(by='xpath',value='//button[@class="_a9-- _a9_1"]').click()
-                        except:
-                              pass        
-                        time.sleep(5)
-                        message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
-                        message_input.send_keys("hello")
-                        message_input.send_keys(Keys.ENTER)
-                except:
-                        pass
+                self.driver.find_element(by='xpath',value='//input[@placeholder="Search..."]').send_keys(searches)
+                time.sleep(5)
+                self.driver.find_element(by='xpath',value='//div[@class="x9f619 x1n2onr6 x1ja2u2z xdt5ytf x2lah0s x193iq5w xeuugli xamitd3 x78zum5"]').click()
+                send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Chat")]')
+                send_message_button.click()
+                time.sleep(5)
+                message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
+                message_input.send_keys("hello")
+                message_input.send_keys(Keys.ENTER)
+               
+                # try:
+                #         send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Message")]')
+                #         send_message_button.click()
+                #         time.sleep(15)
+                #         try:
+                #                 self.driver.find_element(by='xpath',value='//button[@class="_a9-- _a9_1"]').click()
+                #         except:
+                #               pass        
+                #         time.sleep(5)
+                #         message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
+                #         message_input.send_keys("hello")
+                #         message_input.send_keys(Keys.ENTER)
+                # except:
+                #         pass
         
 
 
