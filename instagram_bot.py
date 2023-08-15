@@ -388,7 +388,7 @@ class MainWindow(QMainWindow):
         for searches in lines:
                 self.driver.get("https://www.instagram.com/direct/t")
                 time.sleep(15)
-                
+
                 send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Send message")]')
                 send_message_button.click()
                 time.sleep(5)
@@ -402,22 +402,6 @@ class MainWindow(QMainWindow):
                 message_input.send_keys("hello")
                 message_input.send_keys(Keys.ENTER)
                
-                # try:
-                #         send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Message")]')
-                #         send_message_button.click()
-                #         time.sleep(15)
-                #         try:
-                #                 self.driver.find_element(by='xpath',value='//button[@class="_a9-- _a9_1"]').click()
-                #         except:
-                #               pass        
-                #         time.sleep(5)
-                #         message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
-                #         message_input.send_keys("hello")
-                #         message_input.send_keys(Keys.ENTER)
-                # except:
-                #         pass
-        
-
 
     def send_Post_users(self,file_path4):
         print("message=====message")
@@ -437,25 +421,30 @@ class MainWindow(QMainWindow):
                 likes_popup = self.driver.find_elements(by='xpath', value='//div[@class="x1dm5mii x16mil14 xiojian x1yutycm x1lliihq x193iq5w xh8yej3"]//a[@class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk x78zum5 xdl72j9 xdt5ytf x2lah0s xe8uvvx xdj266r x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd x1n2onr6 x16tdsg8 x1hl2dhg xggy1nq x1ja2u2z x1t137rt xnz67gz x14yjl9h xudhj91 x18nykt9 xww2gxu x9f619 x1lliihq x2lah0s x6ikm8r x10wlt62 x1n2onr6 x1ykvv32 xougopr x159fomc xnp5s1o x194ut8o x1vzenxt xd7ygy7 xt298gk x1xrz1ek x1s928wv x1n449xj x2q1x1w x1j6awrg x162n7g1 x1m1drc7 x1ypdohk x4gyw5p _a6hd"]')
                 for i in range(min(30, len(likes_popup))):
                         link = likes_popup[i].get_attribute("href")
+                        
                         temp.append(link)
                         if len(set(temp)) >= 30:
                                 break
                 for link in temp:
-                        print(link)
-                        self.driver.get(link)
-                        time.sleep(5)
-
-                
-                try:
-                        send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Message")]')
-                        send_message_button.click()
-                        time.sleep(10)
-                        message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
-                        message_input.send_keys("hello")
-                        time.sleep(2)
-                        message_input.send_keys(Keys.ENTER)
-                except:
-                        pass
+                        link=link.split("/")
+                        
+                        try:
+                                self.driver.get("https://www.instagram.com/direct/t")
+                                time.sleep(15)
+                                send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Send message")]')
+                                send_message_button.click()
+                                time.sleep(5)
+                                self.driver.find_element(by='xpath',value='//input[@placeholder="Search..."]').send_keys(link3[])
+                                time.sleep(5)
+                                self.driver.find_element(by='xpath',value='//div[@class="x9f619 x1n2onr6 x1ja2u2z xdt5ytf x2lah0s x193iq5w xeuugli xamitd3 x78zum5"]').click()
+                                send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Chat")]')
+                                send_message_button.click()
+                                time.sleep(5)
+                                message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
+                                message_input.send_keys("hello")
+                                message_input.send_keys(Keys.ENTER)
+                        except:
+                                pass
 
 
     def tags(self,file_path3):
@@ -485,19 +474,28 @@ class MainWindow(QMainWindow):
                         if len(set(temp)) >= 30:
                                 break
                 for link in temp:
-                        print(link)
-                        self.driver.get(link)
+                        link=link.split("/")
+                        
+                        
                         time.sleep(15)     
-                try:
-                        send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Message")]')
-                        send_message_button.click()
-                        time.sleep(10)
-                        message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
-                        message_input.send_keys("hello")
-                        time.sleep(2)
-                        message_input.send_keys(Keys.ENTER)
-                except:
-                        pass
+                        try:
+                                self.driver.get("https://www.instagram.com/direct/t")
+                                time.sleep(15)
+                                send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Send message")]')
+                                send_message_button.click()
+                                time.sleep(5)
+                                self.driver.find_element(by='xpath',value='//input[@placeholder="Search..."]').send_keys(link[3])
+                                time.sleep(5)
+                                self.driver.find_element(by='xpath',value='//div[@class="x9f619 x1n2onr6 x1ja2u2z xdt5ytf x2lah0s x193iq5w xeuugli xamitd3 x78zum5"]').click()
+                                send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Chat")]')
+                                send_message_button.click()
+                                time.sleep(5)
+                                message_input= self.driver.find_element(by='xpath',value='//p[@class="xat24cr xdj266r"]')
+                                message_input.send_keys("hello")
+                                message_input.send_keys(Keys.ENTER)
+                        except:
+                                pass
+                        
 
 
 
