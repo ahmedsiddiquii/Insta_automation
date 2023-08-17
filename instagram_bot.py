@@ -361,10 +361,10 @@ class MainWindow(QMainWindow):
                 try:
                         self.driver = webdriver.Chrome()
                         self.driver.get("https://www.instagram.com/")
-                        time.sleep(15)  
+                        time.sleep(5)  
                         login_insta = self.driver.find_element(by='xpath',value=  '//input[@aria-label="Phone number, username, or email"]').send_keys(ids[i])
                         password= self.driver.find_element(by='xpath',value='//input[@type="password"]').send_keys(passwords[i])
-                        time.sleep(15)
+                        time.sleep(5)
                         login= self.driver.find_element(by='xpath', value='//div//button[@class="_acan _acap _acas _aj1-"]').click()
                         time.sleep(10)
                 except:
@@ -434,7 +434,7 @@ class MainWindow(QMainWindow):
                                 send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Send message")]')
                                 send_message_button.click()
                                 time.sleep(5)
-                                self.driver.find_element(by='xpath',value='//input[@placeholder="Search..."]').send_keys(link3[])
+                                self.driver.find_element(by='xpath',value='//input[@placeholder="Search..."]').send_keys(link[3])
                                 time.sleep(5)
                                 self.driver.find_element(by='xpath',value='//div[@class="x9f619 x1n2onr6 x1ja2u2z xdt5ytf x2lah0s x193iq5w xeuugli xamitd3 x78zum5"]').click()
                                 send_message_button = self.driver.find_element(by='xpath', value='//div[contains(text(), "Chat")]')
